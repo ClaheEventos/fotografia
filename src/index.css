@@ -1,0 +1,124 @@
+body {
+  background-color: #111;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Contenedor centrado y responsivo */
+.contenedor-crear {
+  max-width: 600px;
+  margin: 50px auto;
+  background-color: #1c1c1c;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Título */
+.contenedor-crear h2 {
+  color: #ffd700;
+  text-align: center;
+}
+
+/* Inputs y select */
+.contenedor-crear input,
+.contenedor-crear select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ffd700;
+  background-color: #303317;
+  color: #fff;
+  border-radius: 8px;
+}
+
+/* Botón */
+.contenedor-crear button {
+  background-color: #ffd700;
+  color: #111;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contenedor-crear button:hover {
+  background-color: #e6c200;
+}
+
+/* Barra de progreso */
+.progress-container {
+  width: 100%;
+  background-color: #333;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 16px;
+  background-color: #ffd700;
+  transition: width 0.3s ease;
+}
+
+/* Texto de feedback */
+.feedback {
+  text-align: center;
+  font-weight: bold;
+  color: #90ee90;
+}
+.contenedor-crear button {
+  background-color: #ffd700;
+  color: #111;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+}
+
+.contenedor-crear button:hover {
+  background-color: #e6c200;
+  transform: scale(1.02);
+}
+
+/* Lista de archivos subidos */
+.contenedor-crear ul {
+  margin-top: 1rem;
+  padding-left: 1.2rem;
+  list-style: none;
+}
+
+.contenedor-crear li {
+  background-color: #222;
+  border-left: 4px solid #ffd700;
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .contenedor-crear {
+    margin: 20px;
+    padding: 1.5rem;
+  }
+}
+@keyframes loading {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+  }
