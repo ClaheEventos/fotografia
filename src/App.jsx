@@ -4,7 +4,7 @@ import SubirArchivos from "./pages/SubirArchivos.jsx";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/fotografia">
       <Routes>
         <Route path="/" element={<CrearCarpeta />} />
         <Route path="/subir" element={<SubirArchivos />} />
