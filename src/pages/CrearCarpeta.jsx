@@ -12,7 +12,7 @@ function CrearCarpeta() {
   const navigate = useNavigate();
 
   const eventos = [
-    "1 añito", "15 años", "18 años", "Decada", "Casamiento"
+    "1 añito", "15 años", "18 años", "30 Decada", "40 Decada", "50 Decada", "+60 Decada", "Casamiento"
   ];
 
   const crearCarpeta = async () => {
