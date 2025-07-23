@@ -21,8 +21,6 @@ function SubirArchivos() {
     setSubiendo(true);
     setProgreso(0);
 
- 
-    // Subida de archivos
     for (let i = 0; i < archivos.length; i++) {
       const archivo = archivos[i];
       const reader = new FileReader();
@@ -67,7 +65,7 @@ function SubirArchivos() {
 
   return (
     <div className="contenedor-crear">
-      <h2>Subir Múltiples Fotos</h2>
+      <h2>Subir Fotos o Videos</h2>
 
       {!folderId && (
         <p style={{ color: "red" }}>⚠️ Primero tenés que crear una carpeta</p>
@@ -77,11 +75,11 @@ function SubirArchivos() {
         <>
           <input
             type="file"
-            accept="image/*"
+            accept="image/*,video/*"
             multiple
             onChange={(e) => setArchivos(Array.from(e.target.files))}
           />
-          <button onClick={subirArchivos}>Subir Fotos</button>
+          <button onClick={subirArchivos}>Subir Archivos</button>
         </>
       )}
 
@@ -96,7 +94,7 @@ function SubirArchivos() {
 
       {finalizado && (
         <p style={{ color: "green", fontWeight: "bold" }}>
-          ✅ ¡Gracias por subir tus fotos!
+          ✅ ¡Gracias por subir tus archivos!
         </p>
       )}
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function CrearCarpeta() {
-  const [evento, setEvento] = useState("Evento 1");
+  const [evento, setEvento] = useState("1 añito");
   const [nombreEventoPersonalizado, setNombreEventoPersonalizado] = useState("");
   const [fecha, setFecha] = useState("");
   const [duenio, setDuenio] = useState("");
@@ -12,12 +12,11 @@ function CrearCarpeta() {
   const navigate = useNavigate();
 
   const eventos = [
-    "Evento 1", "Evento 2", "Evento 3", "Evento 4", "Evento 5",
-    "Evento 6", "Evento 7", "Evento 8", "Evento 9", "Evento 10"
+    "1 añito", "15 años", "18 años", "Decada", "Casamiento"
   ];
 
   const crearCarpeta = async () => {
-    if ((!evento && !nombreEventoPersonalizado) || !fecha || !duenio) {
+    if ((!evento.trim() && !nombreEventoPersonalizado.trim()) || !fecha || !duenio.trim()) {
       alert("⚠️ Completá todos los campos: evento, fecha y dueño");
       return;
     }
@@ -39,7 +38,7 @@ function CrearCarpeta() {
     const nombreCarpeta = `${nombreFinalEvento} - ${fecha} - ${duenio}`;
 
     try {
-      // 📁 1. Crear carpeta en Drive
+      // 1. Crear carpeta en Drive
       const resCarpeta = await fetch("https://script.google.com/macros/s/AKfycbx63E5b-tOrD_cXI7o-jHgkLQ9yDWHXam2IA9Jnw-saadbUUhFUzTf2rYOwJ2ZSbL_l3Q/exec", {
         method: "POST",
         body: JSON.stringify({
@@ -58,22 +57,23 @@ function CrearCarpeta() {
       const folderId = dataCarpeta.folderId;
       const folderLink = `https://drive.google.com/drive/folders/${folderId}`;
 
-      // 🛠️ DEBUG opcional
-      console.log("Registrando en hoja:", {
+      // DEBUG: verificar datos enviados
+      console.log("✅ Enviando al Apps Script:", {
+        eventoBase: evento,
         evento: nombreFinalEvento,
         fecha,
-        duenio
-        // link: folderLink (eliminado porque da error)
+        duenio,
+        link: folderLink
       });
 
-      // 📄 2. Registrar en hoja de cálculo (sin el campo link)
+      // 2. Registrar en hoja de cálculo
       await fetch("https://script.google.com/macros/s/AKfycbzeAVGEefNfYePAjx6LGw97cL0NzfeWbza1o-jEeps3EGXpqKbucOTTdSdm8PaqLHNqwg/exec", {
         method: "POST",
         body: JSON.stringify({
-          evento: nombreFinalEvento,
+          evento: evento, // <- nombre final (personalizado o base)
           fecha: fecha,
           duenio: duenio,
-          link: folderLink 
+          link: folderLink
         }),
       });
 
@@ -107,14 +107,7 @@ function CrearCarpeta() {
 
       <br />
 
-      <label>Nombre del Evento (personalizado)</label>
-      <input
-        type="text"
-        name="nombreEventoPersonalizado"
-        placeholder="Ej: Casamiento Agustina y Leo"
-        value={nombreEventoPersonalizado}
-        onChange={(e) => setNombreEventoPersonalizado(e.target.value)}
-      />
+     
 
       <br />
 
