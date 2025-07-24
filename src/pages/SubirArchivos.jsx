@@ -2,6 +2,7 @@ import { useState } from "react";
 
 function SubirArchivos() {
   const [archivos, setArchivos] = useState([]);
+  const [fallidos, setFallidos] = useState([]);
   const [subiendo, setSubiendo] = useState(false);
   const [finalizado, setFinalizado] = useState(false);
   const [progreso, setProgreso] = useState(0);
@@ -12,17 +13,21 @@ function SubirArchivos() {
   const fecha = localStorage.getItem("fecha");
   const duenio = localStorage.getItem("duenio");
 
-  const subirArchivos = async () => {
-    if (!archivos.length || !folderId) {
+  const subirArchivos = async (archivosASubir = archivos) => {
+    if (!archivosASubir.length || !folderId) {
       alert("⚠️ Seleccioná archivos y asegurate de haber creado una carpeta");
       return;
     }
 
     setSubiendo(true);
+    setFinalizado(false);
+    setFallidos([]);
     setProgreso(0);
 
-    for (let i = 0; i < archivos.length; i++) {
-      const archivo = archivos[i];
+    const nuevosFallidos = [];
+
+    for (let i = 0; i < archivosASubir.length; i++) {
+      const archivo = archivosASubir[i];
       const reader = new FileReader();
 
       const base64 = await new Promise((resolve) => {
@@ -50,17 +55,24 @@ function SubirArchivos() {
         const data = await res.json();
         if (!data.fileId) {
           console.error(`❌ Error al subir ${archivo.name}`);
+          nuevosFallidos.push(archivo);
         }
       } catch (err) {
         console.error(`❌ Error al subir ${archivo.name}`, err);
+        nuevosFallidos.push(archivo);
       }
 
-      const porcentaje = Math.round(((i + 1) / archivos.length) * 100);
+      const porcentaje = Math.round(((i + 1) / archivosASubir.length) * 100);
       setProgreso(porcentaje);
     }
 
     setSubiendo(false);
-    setFinalizado(true);
+    setFallidos(nuevosFallidos);
+    setFinalizado(nuevosFallidos.length === 0);
+  };
+
+  const reintentarFallidos = () => {
+    subirArchivos(fallidos);
   };
 
   return (
@@ -79,7 +91,7 @@ function SubirArchivos() {
             multiple
             onChange={(e) => setArchivos(Array.from(e.target.files))}
           />
-          <button onClick={subirArchivos}>Subir Archivos</button>
+          <button onClick={() => subirArchivos()}>Subir Archivos</button>
         </>
       )}
 
@@ -96,6 +108,20 @@ function SubirArchivos() {
         <p style={{ color: "green", fontWeight: "bold" }}>
           ✅ ¡Gracias por subir tus archivos!
         </p>
+      )}
+
+      {fallidos.length > 0 && !subiendo && (
+        <>
+          <p style={{ color: "red" }}>
+            ❌ Algunos archivos no se pudieron subir:
+          </p>
+          <ul>
+            {fallidos.map((archivo, index) => (
+              <li key={index}>{archivo.name}</li>
+            ))}
+          </ul>
+          <button onClick={reintentarFallidos}>🔁 Reintentar Fallidos</button>
+        </>
       )}
 
       {archivos.length > 0 && !finalizado && (
