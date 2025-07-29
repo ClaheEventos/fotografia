@@ -6,6 +6,7 @@ function CrearCarpeta() {
   const [nombreEventoPersonalizado, setNombreEventoPersonalizado] = useState("");
   const [fecha, setFecha] = useState("");
   const [duenio, setDuenio] = useState("");
+  const [salon, setSalon] = useState("Salón 1"); // valor por defecto
   const [folderId, setFolderId] = useState(null);
   const [creando, setCreando] = useState(false);
   const [progreso, setProgreso] = useState(0);
@@ -15,9 +16,14 @@ function CrearCarpeta() {
     "1 añito", "15 años", "18 años", "30 Decada", "40 Decada", "50 Decada", "+60 Decada", "Casamiento"
   ];
 
+  const salones = ["Varela", "Varela II", "Berazategui", "Monteverde", "París",
+    "Dream's", "Melody", "Luxor", "Bernal", "Sol Fest",
+    "Clahe", "Onix", "Auguri", "Dominico II", "Gala", "Sarandí II",
+    "Garufa", "Lomas", "Temperley", "Clahe Escalada"]; // opciones de salón
+
   const crearCarpeta = async () => {
-    if ((!evento.trim() && !nombreEventoPersonalizado.trim()) || !fecha || !duenio.trim()) {
-      alert("⚠️ Completá todos los campos: evento, fecha y dueño");
+    if ((!evento.trim() && !nombreEventoPersonalizado.trim()) || !fecha || !duenio.trim() || !salon.trim()) {
+      alert("⚠️ Completá todos los campos: evento, fecha, dueño y salón");
       return;
     }
 
@@ -35,7 +41,7 @@ function CrearCarpeta() {
     }, 150);
 
     const nombreFinalEvento = nombreEventoPersonalizado.trim() !== "" ? nombreEventoPersonalizado : evento;
-    const nombreCarpeta = `${nombreFinalEvento} - ${fecha} - ${duenio}`;
+    const nombreCarpeta = `${nombreFinalEvento} -${salon} - ${fecha} - ${duenio}`;
 
     try {
       // 1. Crear carpeta en Drive
@@ -63,16 +69,19 @@ function CrearCarpeta() {
         evento: nombreFinalEvento,
         fecha,
         duenio,
+        salon,
         link: folderLink
       });
 
-      // 2. Registrar en hoja de cálculo
-      await fetch("https://script.google.com/macros/s/AKfycbzeAVGEefNfYePAjx6LGw97cL0NzfeWbza1o-jEeps3EGXpqKbucOTTdSdm8PaqLHNqwg/exec", {
+      // 2. Registrar en hoja de cálculo incluyendo el salón
+      await fetch("https://script.google.com/macros/s/AKfycbxMBspcaZ9L424Nk1UZMyk-RPsawSqpM9P05lPikgkAY7LCeiMf7AIduLPIFEF64T5F9A/exec", {
         method: "POST",
         body: JSON.stringify({
-          evento: evento, // <- nombre final (personalizado o base)
+          eventoBase: evento,
+          evento: nombreFinalEvento,
           fecha: fecha,
           duenio: duenio,
+          salon: salon,
           link: folderLink
         }),
       });
@@ -105,10 +114,7 @@ function CrearCarpeta() {
         ))}
       </select>
 
-      <br />
-
-     
-
+    
       <br />
 
       <label>Seleccionar Fecha</label>
@@ -129,6 +135,15 @@ function CrearCarpeta() {
         value={duenio}
         onChange={(e) => setDuenio(e.target.value)}
       />
+
+      <br />
+
+      <label>Salón</label>
+      <select name="salon" value={salon} onChange={(e) => setSalon(e.target.value)}>
+        {salones.map((sal, idx) => (
+          <option key={idx} value={sal}>{sal}</option>
+        ))}
+      </select>
 
       <br />
 

@@ -91,7 +91,11 @@ function SubirArchivos() {
             multiple
             onChange={(e) => setArchivos(Array.from(e.target.files))}
           />
-          <button onClick={() => subirArchivos()}>Subir Archivos</button>
+          {fallidos.length > 0 ? (
+            <button onClick={reintentarFallidos}>🔁 Reintentar Fallidos</button>
+          ) : (
+            <button onClick={() => subirArchivos()}>Subir Archivos</button>
+          )}
         </>
       )}
 
@@ -120,7 +124,6 @@ function SubirArchivos() {
               <li key={index}>{archivo.name}</li>
             ))}
           </ul>
-          <button onClick={reintentarFallidos}>🔁 Reintentar Fallidos</button>
         </>
       )}
 
