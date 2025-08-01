@@ -76,8 +76,11 @@ function SubirArchivos() {
   };
 
   return (
+    
     <div className="contenedor-crear">
-      <h2>Subir Fotos o Videos</h2>
+      
+      <h2>Subir Fotos</h2>
+     <h3 style={{ textAlign: 'center', color: 'red' }}>¡Cuidado! En caso de problemas de conexión o falla en la carga de los archivos, seleccioná "Reiniciar" para intentar nuevamente. </h3>
 
       {!folderId && (
         <p style={{ color: "red" }}>⚠️ Primero tenés que crear una carpeta</p>
@@ -87,7 +90,7 @@ function SubirArchivos() {
         <>
           <input
             type="file"
-            accept="image/*,video/*"
+            accept="image/*"
             multiple
             onChange={(e) => setArchivos(Array.from(e.target.files))}
           />
