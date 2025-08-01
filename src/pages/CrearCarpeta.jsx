@@ -6,7 +6,7 @@ function CrearCarpeta() {
   const [nombreEventoPersonalizado, setNombreEventoPersonalizado] = useState("");
   const [fecha, setFecha] = useState("");
   const [duenio, setDuenio] = useState("");
-  const [salon, setSalon] = useState("Salón 1"); // valor por defecto
+  const [salon, setSalon] = useState("Varela"); // valor por defecto
   const [folderId, setFolderId] = useState(null);
   const [creando, setCreando] = useState(false);
   const [progreso, setProgreso] = useState(0);
@@ -42,10 +42,10 @@ function CrearCarpeta() {
 
     const nombreFinalEvento = nombreEventoPersonalizado.trim() !== "" ? nombreEventoPersonalizado : evento;
     const nombreCarpeta = `${nombreFinalEvento} -${salon} - ${fecha} - ${duenio}`;
-
+// https://script.google.com/macros/s/AKfycbziBu6gjOw1gCE-DNbQfn_2cOmUEqnPYcpujiSh4zXuf4q3AEkv0243aztLn4kHvYuVlg/exec
     try {
       // 1. Crear carpeta en Drive
-      const resCarpeta = await fetch("https://script.google.com/macros/s/AKfycbx63E5b-tOrD_cXI7o-jHgkLQ9yDWHXam2IA9Jnw-saadbUUhFUzTf2rYOwJ2ZSbL_l3Q/exec", {
+      const resCarpeta = await fetch("https://script.google.com/macros/s/AKfycbziBu6gjOw1gCE-DNbQfn_2cOmUEqnPYcpujiSh4zXuf4q3AEkv0243aztLn4kHvYuVlg/exec", {
         method: "POST",
         body: JSON.stringify({
           action: "crearCarpeta",
@@ -74,7 +74,7 @@ function CrearCarpeta() {
       });
 
       // 2. Registrar en hoja de cálculo incluyendo el salón
-      await fetch("https://script.google.com/macros/s/AKfycbxMBspcaZ9L424Nk1UZMyk-RPsawSqpM9P05lPikgkAY7LCeiMf7AIduLPIFEF64T5F9A/exec", {
+      await fetch("https://script.google.com/macros/s/AKfycbz6E8cCL_xY79qAJrfu0zSPCAnkRQF6mBD6oYGCoo2LEWbq3hhX1L9MiQWQm78oQsFy/exec", {
         method: "POST",
         body: JSON.stringify({
           eventoBase: evento,

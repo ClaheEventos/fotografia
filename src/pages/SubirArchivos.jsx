@@ -39,7 +39,7 @@ function SubirArchivos() {
 
       try {
         const res = await fetch(
-          "https://script.google.com/macros/s/AKfycbx63E5b-tOrD_cXI7o-jHgkLQ9yDWHXam2IA9Jnw-saadbUUhFUzTf2rYOwJ2ZSbL_l3Q/exec",
+          "https://script.google.com/macros/s/AKfycbziBu6gjOw1gCE-DNbQfn_2cOmUEqnPYcpujiSh4zXuf4q3AEkv0243aztLn4kHvYuVlg/exec",
           {
             method: "POST",
             body: JSON.stringify({
