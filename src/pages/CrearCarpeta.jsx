@@ -19,7 +19,7 @@ function CrearCarpeta() {
   const salones = ["Varela", "Varela II", "Berazategui", "Monteverde", "París",
     "Dream's", "Melody", "Luxor", "Bernal", "Sol Fest",
     "Clahe", "Onix", "Auguri", "Dominico II", "Gala", "Sarandí II",
-    "Garufa", "Lomas", "Temperley", "Clahe Escalada", "Piñero", "Monte Grande"]; // opciones de salón
+    "Garufa", "Lomas", "Temperley", "Clahe Escalada", "Piñeyro", "Monte Grande"]; // opciones de salón
 
   const crearCarpeta = async () => {
     if ((!evento.trim() && !nombreEventoPersonalizado.trim()) || !fecha || !duenio.trim() || !salon.trim()) {
