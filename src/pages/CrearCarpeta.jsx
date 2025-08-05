@@ -13,13 +13,13 @@ function CrearCarpeta() {
   const navigate = useNavigate();
 
   const eventos = [
-    "1 añito", "15 años", "18 años", "30 Decada", "40 Decada", "50 Decada", "+60 Decada", "Casamiento"
+    "1 añito", "15 años", "18 años", "30 Decada", "40 Decada", "50 Decada", "60 Decada", "Casamiento"
   ];
 
   const salones = ["Varela", "Varela II", "Berazategui", "Monteverde", "París",
     "Dream's", "Melody", "Luxor", "Bernal", "Sol Fest",
     "Clahe", "Onix", "Auguri", "Dominico II", "Gala", "Sarandí II",
-    "Garufa", "Lomas", "Temperley", "Clahe Escalada"]; // opciones de salón
+    "Garufa", "Lomas", "Temperley", "Clahe Escalada", "Piñero", "Monte Grande"]; // opciones de salón
 
   const crearCarpeta = async () => {
     if ((!evento.trim() && !nombreEventoPersonalizado.trim()) || !fecha || !duenio.trim() || !salon.trim()) {
