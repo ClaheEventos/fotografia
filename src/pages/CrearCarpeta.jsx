@@ -21,27 +21,35 @@ function CrearCarpeta() {
     "Clahe", "Onix", "Auguri", "Dominico II", "Gala", "Sarandí II",
     "Garufa", "Lomas", "Temperley", "Clahe Escalada", "Piñeyro", "Monte Grande"]; // opciones de salón
 
-  const crearCarpeta = async () => {
-    if ((!evento.trim() && !nombreEventoPersonalizado.trim()) || !fecha || !duenio.trim() || !salon.trim()) {
-      alert("⚠️ Completá todos los campos: evento, fecha, dueño y salón");
-      return;
-    }
+const crearCarpeta = async () => {
+  if ((!evento.trim() && !nombreEventoPersonalizado.trim()) || !fecha || !duenio.trim() || !salon.trim()) {
+    alert("⚠️ Completá todos los campos: evento, fecha, dueño y salón");
+    return;
+  }
 
-    setProgreso(0);
-    setCreando(true);
+  setProgreso(0);
+  setCreando(true);
 
-    const intervalo = setInterval(() => {
-      setProgreso((prev) => {
-        if (prev >= 95) {
-          clearInterval(intervalo);
-          return 95;
-        }
-        return prev + 5;
-      });
-    }, 150);
+  const intervalo = setInterval(() => {
+    setProgreso((prev) => {
+      if (prev >= 95) {
+        clearInterval(intervalo);
+        return 95;
+      }
+      return prev + 5;
+    });
+  }, 150);
 
-    const nombreFinalEvento = nombreEventoPersonalizado.trim() !== "" ? nombreEventoPersonalizado : evento;
-    const nombreCarpeta = `${nombreFinalEvento} -${salon} - ${fecha} - ${duenio}`;
+  const nombreFinalEvento = nombreEventoPersonalizado.trim() !== "" ? nombreEventoPersonalizado : evento;
+
+  // Formatear la fecha como dd-mm-yyyy (con ceros si faltan)
+  const [year, monthRaw, dayRaw] = fecha.split("-");
+  const day = dayRaw.padStart(2, "0");
+  const month = monthRaw.padStart(2, "0");
+  const fechaFormateada = `${day}-${month}-${year}`;
+
+  const nombreCarpeta = `${fechaFormateada} - ${nombreFinalEvento} - ${salon} - - ${duenio}`;
+
 // https://script.google.com/macros/s/AKfycbziBu6gjOw1gCE-DNbQfn_2cOmUEqnPYcpujiSh4zXuf4q3AEkv0243aztLn4kHvYuVlg/exec
     try {
       // 1. Crear carpeta en Drive

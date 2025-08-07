@@ -80,8 +80,9 @@ function SubirArchivos() {
     <div className="contenedor-crear">
       
       <h2>Subir Fotos</h2>
+      <div className="aviosInforme">
      <h3 style={{ textAlign: 'center', color: 'red' }}>¡Cuidado! En caso de problemas de conexión o falla en la carga de los archivos, seleccioná "Reiniciar" para intentar nuevamente. </h3>
-
+</div>
       {!folderId && (
         <p style={{ color: "red" }}>⚠️ Primero tenés que crear una carpeta</p>
       )}
